@@ -1,8 +1,32 @@
 venv/
 .env
-*.pyc\
+*.pyc
 __pycache__/
 media/
 static/
 .idea/
 .vscode/
+# npm/yarn
+frontend/node_modules/
+
+# сборка Vite (по умолчанию выход в /dist, см. outDir в vite.config.js)
+frontend/dist/
+
+# кэши Vite
+frontend/.vite/
+frontend/.cache/
+
+# файлы окружения
+.env
+.env.local
+.env.*.local
+
+# если есть вывод Django
+media/
+staticfiles/
+
+# IDE и OS-мусор
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
