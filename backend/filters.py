@@ -7,7 +7,7 @@ class ProductFilter(django_filters.FilterSet):
     price_min = django_filters.NumberFilter(field_name="price", lookup_expr="gte")
     price_max = django_filters.NumberFilter(field_name="price", lookup_expr="lte")
     category = django_filters.CharFilter(
-        field_name="category__slug", lookup_expr="exact"
+        field_name="category__slug", lookup_expr="iexact"
     )
     is_active = django_filters.BooleanFilter(field_name="is_active")
 

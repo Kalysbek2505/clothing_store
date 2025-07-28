@@ -3,10 +3,22 @@ from rest_framework import serializers
 from .models import Banner, Category, Product, ProductImage, Review, TextBlock
 
 
+# backend/serializers.py
+from rest_framework import serializers
+from .models import Category
+
 class CategorySerializer(serializers.ModelSerializer):
+    
+    children = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
-        fields = "__all__"
+        
+        fields = ('id', 'name', 'slug', 'children')
+
+    def get_children(self, obj):
+        qs = obj.children.all()
+        return CategorySerializer(qs, many=True, context=self.context).data
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -24,6 +36,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
     main_image_url = serializers.SerializerMethodField()
+    slug = serializers.CharField(read_only=True) 
 
     class Meta:
         model = Product

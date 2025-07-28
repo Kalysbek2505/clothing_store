@@ -15,8 +15,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(is_active=True)
     serializer_class = ProductSerializer
+    lookup_field = "slug"
+    lookup_url_kwarg = "slug"
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
