@@ -1,20 +1,14 @@
 repos:
   - repo: https://github.com/psf/black
     rev: 25.1.0
-    hooks: [{id: black}]
+    hooks:
+      - id: black
   - repo: https://github.com/PyCQA/isort
-    rev: 6.0.1
-    hooks: [{id: isort}]
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.2.0
-    hooks: [{id: flake8}]
-  - repo: https://github.com/rtts/djhtml
-    rev: 3.0.8
-    hooks: [{id: djhtml}]
-    # в .pre-commit-config.yaml
-  # - repo: https://github.com/myint/autoflake
-  #   rev: v1.4
-  #   hooks:
-  #     - id: autoflake
-  #       additional_dependencies: [setuptools]    # ← вот это
-  #       args: [--in-place, --remove-all-unused-imports, --recursive, backend, config]
+    rev: 5.12.0
+    hooks:
+      - id: isort
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 7.1.0
+    hooks:
+      - id: flake8
+        args: [--max-line-length=88]
