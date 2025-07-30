@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const BASE = 'http://127.0.0.1:8000/backend/api/products/';
+const BASE = '/backend/api/products/';
 
 export default function ProductDetail() {
   const { slug } = useParams();

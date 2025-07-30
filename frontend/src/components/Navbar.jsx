@@ -33,21 +33,33 @@ export default function Navbar() {
 
   // fetch categories for "Каталог" submenu
   useEffect(() => {
-    fetch('/backend/api/categories/?parent__isnull=true')
-      .then(res => res.json())
-      .then(data => {
+    const controller = new AbortController();
+    async function loadCategories() {
+      try {
+        const res = await fetch(
+          '/backend/api/categories/?parent__isnull=true',
+          { signal: controller.signal }
+        );
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        const data  = await res.json();
         const roots = Array.isArray(data) ? data : data.results;
         setCategories(
-            roots.map(cat => ({
+          roots.map(cat => ({
             label: cat.name,
             href:  `/catalog?category=${cat.slug}`,
             children: cat.children.map(c => ({
-                label: c.name,
-                href:  `/catalog?category=${c.slug}`
+              label: c.name,
+              href:  `/catalog?category=${c.slug}`
             }))
-            }))
-        )});
-        });
+          }))
+        );
+      } catch (err) {
+        if (err.name !== 'AbortError') console.error('Ошибка загрузки категорий:', err);
+      }
+    }
+    loadCategories();
+    return () => controller.abort();
+  }, []); 
 
   // build full menu
   const MENU = [
