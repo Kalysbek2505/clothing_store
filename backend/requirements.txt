@@ -8,3 +8,4 @@ autoflake
 gunicorn
 python-dotenv
 django-imagekit
+whitenoise
