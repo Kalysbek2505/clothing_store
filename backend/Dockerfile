@@ -15,16 +15,18 @@ RUN pip install --upgrade pip && \
 
 COPY . ./
 
-RUN python manage.py collectstatic --noinput
-
+# копируем entrypoint и ставим права
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 RUN adduser --disabled-password --gecos "" appuser && \
     chown -R appuser /app
-USER appuser
 
+USER appuser
 
 EXPOSE 8000
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["gunicorn", "config.wsgi:application", \
      "--bind", "0.0.0.0:8000", \
      "--workers", "3", \
