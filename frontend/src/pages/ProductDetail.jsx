@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const BASE = '/backend/api/products/';
+const BASE = import.meta.env.VITE_API_URL;
 
 export default function ProductDetail() {
   const { slug } = useParams();

@@ -26,7 +26,7 @@ export default function Catalog() {
 
     async function loadProducts() {
       try {
-        const url = new URL('/backend/api/products/', window.location.origin);
+        const url = new URL(import.meta.env.VITE_API_URL, window.location.origin);
         url.searchParams.set('ordering', ordering);
         url.searchParams.set('page', page);
         url.searchParams.set('page_size', PAGE_SIZE);

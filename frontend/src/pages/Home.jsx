@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const BANNER_API = '/backend/api/banners/';
+const BANNER_API = import.meta.env.VITE_API_URL;
 
 export default function Home() {
   const [hero, setHero] = useState(null);

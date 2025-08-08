@@ -159,4 +159,10 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+CORS_ALLOWED_ORIGINS = [
+    'https://nurzat-backend.onrender.com',      # для рендера
+    'https://clothing-store-zeta-bice.vercel.app',         # адрес фронта на Vercel
+    'https://nurzat.kg',                        # если используешь кастомный домен
+]
+
 CORS_ALLOW_ALL_ORIGINS = True  # только в DEV! ⚠️
