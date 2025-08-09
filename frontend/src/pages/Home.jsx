@@ -109,7 +109,7 @@ export default function Home() {
                     Клетчатые рубашки для женщин. Идеальны для повседневного стиля.
                   </p>
                   <a
-                    href="/women"
+                    href="/catalog?category=kletchatye-rubashki"
                     className="btn btn-outline-light align-self-start"
                   >
                     Выбрать
