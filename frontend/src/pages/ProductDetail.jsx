@@ -130,7 +130,7 @@ export default function ProductDetail() {
             {collapsed ? 'Показать всё' : 'Свернуть'}
           </button>
 
-          <a className="btn btn-primary btn-lg btn-block mt-3 btn-order-text">
+          <a href='https://wa.me/996507633332?text=Здравствуйте!' className="btn btn-primary btn-lg btn-block mt-3 btn-order-text">
             <i className="icon-shopping-cart"></i> Заказать
           </a>
 

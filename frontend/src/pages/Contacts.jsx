@@ -29,8 +29,8 @@ export default function Contacts() {
 
             {/* Социальные иконки */}
             <div className="mb-5 contact-social">
-            <a href="https://wa.me/996507633332?text=Здравствуйте!"><span className="icon-instagram" /></a>
-            <a href="#"><span className="icon-whatsapp" /></a>
+            <a href="https://instagram.com/nurzat_clothes"><span className="icon-instagram" /></a>
+            <a href="https://wa.me/996507633332?text=Здравствуйте!"><span className="icon-whatsapp" /></a>
             <a href="#"><span className="icon-telegram" /></a>
             </div>
 
