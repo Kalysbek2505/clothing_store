@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-const BANNER_API = import.meta.env.VITE_API_URL;
+const API = (import.meta.env.VITE_API_URL || '/backend/api').replace(/\/$/, '');
 
 export default function Home() {
   const [hero, setHero] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${BANNER_API}?is_active=true`)
-      .then(res => {
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        // если DRF с пагинацией
-        const list = Array.isArray(data) ? data : data.results;
-        if (list.length > 0) setHero(list[0]);
-        else setError('Нет активных баннеров');
-      })
-      .catch(err => {
-        console.error(err);
-        setError(err.message);
-      });
-  }, []);
+  fetch(`${API}/banners/?is_active=true`)
+    .then(r => { if (!r.ok) throw new Error(`Status ${r.status}`); return r.json(); })
+    .then(data => {
+      const list = Array.isArray(data) ? data : (data?.results || []);
+      if (list.length) setHero(list[0]); else setError('Нет активных баннеров');
+    })
+    .catch(err => { console.error(err); setError(err.message); });
+}, []);
 
   if (error) {
     return (
