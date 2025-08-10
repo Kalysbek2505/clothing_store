@@ -8,7 +8,7 @@ export default function Footer() {
         className="position-relative text-center py-4"
         style={{ background: '#000' }}
       >
-        <p className="mb-2 text-white">© 2025 NOORWEAR. Все права защищены</p>
+        <p className="mb-2 text-white">© 2025 NURZAT. Все права защищены</p>
         <div className="d-flex justify-content-center">
           <a
             href="https://wa.me/77001234567"
