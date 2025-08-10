@@ -11,7 +11,7 @@ export default function Footer() {
         <p className="mb-2 text-white">© 2025 NURZAT. Все права защищены</p>
         <div className="d-flex justify-content-center">
           <a
-            href="https://wa.me/77001234567"
+            href="https://wa.me/996507633332?text=Здравствуйте!"
             target="_blank"
             rel="noopener noreferrer"
             className="mx-3 text-white"
@@ -20,7 +20,7 @@ export default function Footer() {
             <span className="icon-whatsapp" />
           </a>
           <a
-            href="https://instagram.com/noorwear"
+            href="https://instagram.com/nurzat_clothes"
             target="_blank"
             rel="noopener noreferrer"
             className="mx-3 text-white"

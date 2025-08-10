@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const BASE = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_API_URL;
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -20,14 +20,18 @@ export default function ProductDetail() {
 
   // fetch данных
   useEffect(() => {
-    fetch(`${BASE}${slug}/`)
-      .then(r => r.json())
-      .then(data => {
-        setProd(data);
-        AOS.refreshHard();
-      })
-      .catch(err => console.error(err));
-  }, [slug]);
+  (async () => {
+    try {
+      const r = await fetch(`${API}/products/${encodeURIComponent(slug)}/`);
+      if (!r.ok) throw new Error(`Status ${r.status}`);
+      const data = await r.json();
+      setProd(data);
+      AOS.refreshHard?.();
+    } catch (e) {
+      console.error(e);
+    }
+  })();
+}, [slug]);
 
   // карусель + зум
   useEffect(() => {
