@@ -5,6 +5,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProductCard from '../components/ProductCard';
 
+
+const API = (import.meta.env.VITE_API_URL || '/backend/api').replace(/\/$/, '');
 const PAGE_SIZE = 9;
 
 export default function Catalog() {
@@ -17,42 +19,33 @@ export default function Catalog() {
 
   // Инициализация AOS один раз
   useEffect(() => {
-    AOS.init({ duration: 800, easing: 'slide', once: false });
-  }, []);
+  const controller = new AbortController();
 
-  // Фетчим товары при изменении ordering, page или category
-  useEffect(() => {
-    const controller = new AbortController();
+  (async () => {
+    try {
+      const url = new URL(`${API}/products/`, window.location.origin);
+      url.searchParams.set('ordering', ordering || '');
+      url.searchParams.set('page', page);
+      url.searchParams.set('page_size', PAGE_SIZE);
+      if (category) url.searchParams.set('category', category);
 
-    async function loadProducts() {
-      try {
-        const url = new URL(import.meta.env.VITE_API_URL, window.location.origin);
-        url.searchParams.set('ordering', ordering);
-        url.searchParams.set('page', page);
-        url.searchParams.set('page_size', PAGE_SIZE);
-        if (category) {
-          url.searchParams.set('category', category);
-        }
+      const res = await fetch(url.toString(), { signal: controller.signal });
+      if (!res.ok) throw new Error(`Ошибка ${res.status}`);
 
-        const res = await fetch(url.toString(), { signal: controller.signal });
-        if (!res.ok) {
-          throw new Error(`Ошибка ${res.status}`);
-        }
-
-        const data = await res.json();
-        setProducts(data.results || []);
-        AOS.refresh();
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          console.error('Ошибка загрузки каталога:', err);
-          setProducts([]);
-        }
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : (data?.results || []);
+      setProducts(list);            // <-- всегда массив
+      AOS.refresh();
+    } catch (e) {
+      if (e.name !== 'AbortError') {
+        console.error('Ошибка загрузки каталога:', e);
+        setProducts([]);            // <-- не даём упасть на .length
       }
     }
+  })();
 
-    loadProducts();
-    return () => controller.abort();
-  }, [ordering, page, category]);
+  return () => controller.abort();
+}, [ordering, page, category]);
 
   const sortOptions = [
     { label: 'По умолчанию',  value: '' },
