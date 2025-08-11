@@ -37,6 +37,17 @@ ALLOWED_HOSTS = os.getenv(
 ).split(',')
 
 
+CSRF_TRUSTED_ORIGINS = [
+    o.strip() for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()
+]
+# за HTTPS за прокси (nginx):
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# в проде с https включи куки по TLS:
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
