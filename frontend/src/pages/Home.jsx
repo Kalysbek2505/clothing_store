@@ -170,7 +170,7 @@ export default function Home() {
                   <p>
                     Мы — производственная фабрика <strong>Nurzat</strong>, специализируемся на полном цикле создания одежды: от разработки эскиза и паттернов до готового изделия.
                   </p>
-                  <a href="#" className="btn btn-black rounded-0 mt-2">
+                  <a href="/about" className="btn btn-black rounded-0 mt-2">
                     Подробнее
                   </a>
                 </div>
