@@ -50,6 +50,8 @@ services:
       - ./backend/media:/app/media:ro
       - frontend_dist:/usr/share/nginx/html:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./public/robots.txt:/usr/share/nginx/html/robots.txt:ro
+      - ./public/sitemap.xml:/usr/share/nginx/html/sitemap.xml:ro
     networks: [webnet]
 
 volumes:
